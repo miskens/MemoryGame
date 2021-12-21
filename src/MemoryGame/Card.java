@@ -1,5 +1,3 @@
-import java.beans.Visibility;
-
 import javafx.scene.image.Image;
 
 public class Card extends Image {
