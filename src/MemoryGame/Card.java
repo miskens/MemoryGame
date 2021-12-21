@@ -7,14 +7,14 @@ public class Card extends Image {
 
     public Card(String imageSource) {
         super(imageSource);
-        this.visibility = Visibility.Invisible; 
+        this.visibility = Visibility.VISIBLE;
         this.invisibleCardSource = "Icons/turned.png";
     }
 
     public Card(String imageSource, String visibleCardSource) {
         super(imageSource);
         this.visibleCardSource = visibleCardSource;
-        this.visibility = Visibility.Invisible; 
+        this.visibility = Visibility.INVISIBLE; 
         this.invisibleCardSource = "Icons/turned.png";
     }
 
