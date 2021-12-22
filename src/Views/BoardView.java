@@ -6,8 +6,8 @@ import javafx.stage.Stage;
 
 public class BoardView {
     Stage window;
-    Scene optionsScene1;
-    VBox optionsLayout1, optionsLayout2;
+    Scene optionsScene;
+    VBox optionsLayout1;
     int optionsLayoutWidth = 500, optionsLayoutHeight = 500;
 
     public BoardView(Stage window) {
@@ -17,17 +17,17 @@ public class BoardView {
     public void openGame() {
         window.setTitle("Memory Game Fun!!");
 
-        OptionsView optionsView = new OptionsView();
+        OptionsView optionsView = new OptionsView(window);
 
         optionsLayout1 = optionsView.createOptionsLayout();
 
-        optionsScene1 = new Scene(optionsLayout1, optionsLayoutWidth, optionsLayoutHeight);
+        optionsScene = new Scene(optionsLayout1, optionsLayoutWidth, optionsLayoutHeight);
 
-        openNewView(window, optionsScene1);
+        openNewView(window, optionsScene);   
     }
 
-    private void openNewView(Stage window, Scene optionsScene1) {
-        window.setScene(optionsScene1);
+    public void openNewView(Stage window, Scene scene) {
+        window.setScene(scene);
         window.show();
     }
 }
