@@ -1,8 +1,0 @@
-1. Spelarna väljer kort genom att klicka på korten.
-2. Lägg till ett fönster med ett antal kort.
-3. Korten skall placeras ut i ett rutnät (Default 4*4)
-4. Lägga till val av storlek på rutnätet.
-5. Två knappar starta/avsluta programmet
-6. Default två spelare
-7. Spelarnas aktuella poäng(antalet kortpar spelarna har hittat) skall visas.
-8. Vilken spelares tur skall tydligt markeras i fönstret
