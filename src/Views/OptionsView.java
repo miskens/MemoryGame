@@ -8,12 +8,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.geometry.Pos;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 
 public class OptionsView {
 
@@ -21,7 +18,7 @@ public class OptionsView {
     ComboBox<String> nrOfCardsBox;
     Button goToOptions2Btn;
 
-    public FlowPane createOptionsLayout() {
+    public VBox createOptionsLayout() {
 
         ImageView iconImage = getLogo();
 
@@ -37,11 +34,8 @@ public class OptionsView {
         goToOptions2Btn = new Button("Continue!");
         goToOptions2Btn.setMinWidth(100);
 
-        FlowPane layout = new FlowPane();
-        layout.setOrientation(Orientation.VERTICAL);
+        VBox layout = new VBox();
         layout = buildOptionsLayout1(layout, iconImage, nrOfPlayerslabel, nrOfPlayersTextField, nrOfCards, nrOfCardsBox, goToOptions2Btn);
-
-        // goToOptions2Btn.setOnMouseClicked(e -> dothis());
 
         return layout;
     }
@@ -61,11 +55,11 @@ public class OptionsView {
         return logo;
     }
 
-    private FlowPane buildOptionsLayout1(FlowPane layout, ImageView iconImage, Label nrOfPlayerslabel,
+    private VBox buildOptionsLayout1(VBox layout, ImageView iconImage, Label nrOfPlayerslabel,
                                                 TextField nrOfPlayersTextField2, Label nrOfCards, ComboBox<String> nrOfCardsBox2, Button goToOptions2Btn2) {
 
         layout.setPadding(new Insets(10, 10, 10, 10));
-        // layout.setSpacing(10);
+        layout.setSpacing(10);
         layout.setAlignment(Pos.CENTER);
         layout.getChildren().addAll(iconImage, nrOfPlayerslabel, nrOfPlayersTextField, nrOfCards, nrOfCardsBox, goToOptions2Btn);
         
