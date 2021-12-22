@@ -1,5 +1,6 @@
 package MemoryGame;
 
+import Views.BoardView;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -9,7 +10,9 @@ public class Game extends Application {
     }
 
     @Override
-    public void start(Stage arg0) throws Exception {
-        
+    public void start(Stage window) throws Exception {
+        BoardView boardView = new BoardView(window);
+
+        boardView.openGame();
     }
 }
