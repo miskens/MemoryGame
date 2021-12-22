@@ -13,4 +13,4 @@ public class Player {
     public String getPlayerName(){
         return playerName;
     }
-//"vmArgs": "--module-path /home/theo/Hämtningar/openjfx-17.0.1_linux-aarch64_bin-sdk/javafx-sdk-17.0.1/lib/ --add-modules javafx.controls,javafx.fxml",
+
