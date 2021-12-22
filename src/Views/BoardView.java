@@ -1,15 +1,13 @@
 package Views;
 
 import javafx.scene.Scene;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class BoardView {
     Stage window;
     Scene optionsScene1;
-    FlowPane optionsLayout1, optionsLayout2;
+    VBox optionsLayout1, optionsLayout2;
     int optionsLayoutWidth = 500, optionsLayoutHeight = 500;
 
     public BoardView(Stage window) {
