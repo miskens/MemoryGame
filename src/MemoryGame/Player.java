@@ -14,3 +14,7 @@ public class Player {
         return playerName;
     }
 
+    public void setPlayerName(String name) {
+        this.playerName = name;
+    }
+}
