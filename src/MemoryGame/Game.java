@@ -11,7 +11,7 @@ public class Game extends Application {
 
     @Override
     public void start(Stage window) throws Exception {
-        BoardView boardView = new BoardView(window);
+        BoardView boardView = new BoardView(window);      
 
         boardView.openGame();
 
