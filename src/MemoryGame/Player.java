@@ -1,7 +1,7 @@
 package MemoryGame;
 
 public class Player {
-    private final String playerName;
+    private String playerName;
     private int points;
     private boolean active;  
 
