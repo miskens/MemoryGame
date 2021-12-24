@@ -1,6 +1,8 @@
 package Views;
 
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -29,5 +31,11 @@ public class BoardView {
     public void openNewView(Stage window, Scene scene) {
         window.setScene(scene);
         window.show();
+    }
+    public void buildGameboard(String[] playerNames, int rows, int cols) {
+        Alert alert = new Alert(AlertType.INFORMATION);
+
+        alert.setHeaderText("Funkar");
+        alert.showAndWait();
     }
 }

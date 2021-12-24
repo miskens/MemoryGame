@@ -14,5 +14,6 @@ public class Game extends Application {
         BoardView boardView = new BoardView(window);
 
         boardView.openGame();
+
     }
 }
