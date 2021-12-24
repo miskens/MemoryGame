@@ -1,6 +1,7 @@
 package MemoryGame;
+
 public class Player {
-    private String playerName;
+    private final String playerName;
     private int points;
     private boolean active;  
 
@@ -14,7 +15,22 @@ public class Player {
         return playerName;
     }
 
-    public void setPlayerName(String name) {
+    public void setPlayerName(String name){
         this.playerName = name;
+
+    }
+    public boolean getActive(){
+        return active;
+    }
+    public void setActive(){
+
+        setActive();
+    }
+    
+    public int getPoints() {
+        return points;
+    }
+    public void setPoints(int points){
+        this.points = points;
     }
 }
