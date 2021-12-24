@@ -25,13 +25,14 @@ public class BoardView {
 
         optionsScene = new Scene(optionsLayout1, optionsLayoutWidth, optionsLayoutHeight);
 
-        openNewView(window, optionsScene);   
+        openNewView(window, optionsScene);
     }
 
     public void openNewView(Stage window, Scene scene) {
         window.setScene(scene);
         window.show();
     }
+
     public void buildGameboard(String[] playerNames, int rows, int cols) {
         Alert alert = new Alert(AlertType.INFORMATION);
 
