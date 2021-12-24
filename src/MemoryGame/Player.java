@@ -34,4 +34,3 @@ public class Player {
         this.points = points;
     }
 }
-
