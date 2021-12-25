@@ -20,13 +20,14 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import Views.OptionsView;
 
 public class BoardView {
     Stage window;
     Scene optionsScene;
     VBox optionsLayout1;
     Player[] players;
-    Button endGameButton, starNewGameButton;
+    Button endGameButton, startNewGameButton;
     int gameBoardWidth = 1000, gameBoardHeight = 500;
     int optionsLayoutWidth = 500, optionsLayoutHeight = 500;
     int leftPaneWidth = 250;
@@ -53,6 +54,7 @@ public class BoardView {
     }
 
     public void buildGameboard(String[] playerNames, int rows, int cols) {
+        OptionsView optionsView = new OptionsView(window);
         FlowPane leftGameBoardPane = new FlowPane();
         leftGameBoardPane.setOrientation(Orientation.VERTICAL);
         leftGameBoardPane.setVgap(5);
@@ -80,8 +82,10 @@ public class BoardView {
         endGameButton = createButton("End Game!");
         leftGameBoardPane.getChildren().addAll(endGameButton);
         
-        starNewGameButton = createButton("Start New Game");
-        leftGameBoardPane.getChildren().addAll(starNewGameButton);
+        startNewGameButton = createButton("Start New Game");
+        leftGameBoardPane.getChildren().addAll(startNewGameButton);
+        startNewGameButton.setId("startNewGameBtn");
+        optionsView.createButtonEvents(startNewGameButton);
         
 
         Scene gameScene = new Scene(leftGameBoardPane, gameBoardWidth, gameBoardHeight);
