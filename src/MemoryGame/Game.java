@@ -90,13 +90,10 @@ public class Game extends Application {
                 nrOfClicks = 1;
                 return;
             }
-            else {
-                imageViewClick1.setImage(new Card(card1.getInvisibleCardSource(), card1.getVisibleCardSource()));
-                nrOfClicks = 0;
+            nrOfClicks = 0;
 
+            imageViewClick1.setImage(new Card(card1.getInvisibleCardSource(), card1.getVisibleCardSource()));
             return;
-            }
-            
         }
 
             card2 = (Card)imageViewClick2.getImage();
