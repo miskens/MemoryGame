@@ -1,20 +1,34 @@
 package Views;
 
+import java.util.concurrent.Flow;
+
+import MemoryGame.Player;
 import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class BoardView {
     Stage window;
     Scene optionsScene;
     VBox optionsLayout1;
+    Player[] players;
     int gameBoardWidth = 1000, gameBoardHeight = 500;
     int optionsLayoutWidth = 500, optionsLayoutHeight = 500;
+    int leftPaneWidth = 250;
 
     public BoardView(Stage window) {
         this.window = window;
@@ -38,19 +52,38 @@ public class BoardView {
     }
 
     public void buildGameboard(String[] playerNames, int rows, int cols) {
-        FlowPane gameBoardPane = new FlowPane();
-        gameBoardPane.setOrientation(Orientation.VERTICAL);
+        FlowPane leftGameBoardPane = new FlowPane();
+        leftGameBoardPane.setOrientation(Orientation.VERTICAL);
+        leftGameBoardPane.setVgap(5);
         
         Label[] playerNameLabels = new Label[playerNames.length];
         for (int i = 0; i < playerNames.length; i++) {
-            playerNameLabels[i] = new Label();
-            playerNameLabels[i].setText(playerNames[i]);
+            players = new Player[playerNames.length];
+            players[i] = new Player(playerNames[i]);
 
+            playerNameLabels[i] = new Label();
+            playerNameLabels[i].setText(players[i].getPlayerName() + "\n" +
+                                        players[i].getPoints());
+
+            
+            playerNameLabels[i].setMinSize(leftPaneWidth, 150);
+            playerNameLabels[i].setAlignment(Pos.CENTER);
+            playerNameLabels[i].setFont(new Font("Roman", 24));
+
+            playerNameLabels[i].setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,
+            BorderWidths.DEFAULT)));
         }
 
-        gameBoardPane.getChildren().addAll(playerNameLabels);
+        leftGameBoardPane.getChildren().addAll(playerNameLabels);
 
-        Scene gameScene = new Scene(gameBoardPane, gameBoardWidth, gameBoardHeight);
+        Button endGameButton = new Button("End Game!");
+        endGameButton.setMinSize(leftPaneWidth, 50);
+        leftGameBoardPane.getChildren().addAll(endGameButton);
+        Button starNewGameButton = new Button("End Game!");
+        starNewGameButton.setMinSize(leftPaneWidth, 50);
+        leftGameBoardPane.getChildren().addAll(starNewGameButton);
+
+        Scene gameScene = new Scene(leftGameBoardPane, gameBoardWidth, gameBoardHeight);
 
         openNewView(window, gameScene);
     }
