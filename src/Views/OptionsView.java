@@ -219,9 +219,26 @@ public class OptionsView {
                     Alert alert = new Alert(AlertType.CONFIRMATION);
                     alert.setHeaderText("Alert");
                     alert.setContentText("Are you sure?");
+
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == ButtonType.OK){
                         backToOptions1();
+                    } else {
+                        return;
+                    } 
+                });
+                return;
+            }
+            case "endGameBtn": {
+                btn.setOnMouseReleased(e -> {
+
+                    Alert alert = new Alert(AlertType.CONFIRMATION);
+                    alert.setHeaderText("Alert");
+                    alert.setContentText("End Game?");
+                    
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK){
+                        System.exit(0);
                     } else {
                         return;
                     } 

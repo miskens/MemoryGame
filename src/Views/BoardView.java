@@ -80,14 +80,16 @@ public class BoardView {
         leftGameBoardPane.getChildren().addAll(playerNameLabels);
 
         endGameButton = createButton("End Game!");
-        leftGameBoardPane.getChildren().addAll(endGameButton);
+        endGameButton.setId("endGameBtn");
         
         startNewGameButton = createButton("Start New Game");
-        leftGameBoardPane.getChildren().addAll(startNewGameButton);
         startNewGameButton.setId("startNewGameBtn");
+
+        leftGameBoardPane.getChildren().addAll(endGameButton, startNewGameButton);
+        
+        optionsView.createButtonEvents(endGameButton);
         optionsView.createButtonEvents(startNewGameButton);
         
-
         Scene gameScene = new Scene(leftGameBoardPane, gameBoardWidth, gameBoardHeight);
 
         openNewView(window, gameScene);
