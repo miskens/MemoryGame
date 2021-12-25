@@ -4,16 +4,11 @@ import java.util.Random;
 
 import Views.BoardView;
 import javafx.application.Application;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.animation.PauseTransition;
@@ -61,10 +56,10 @@ public class Game extends Application {
     private void setActivePlayerColor() {
         for (int i = 0; i < playerLabels.length; i++) {
             if(players[i].getActive() == true) {
-                playerLabels[i].setBackground(new Background(new BackgroundFill(Color.DARKTURQUOISE, new CornerRadii(0), new Insets(0))));
+                playerLabels[i].setStyle("-fx-background-color: lightgreen;");
             }
             else {
-                playerLabels[i].setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, new CornerRadii(0), new Insets(0))));
+                playerLabels[i].setStyle("-fx-background-color: aliceblue;");
             }
         }
     }
@@ -91,6 +86,10 @@ public class Game extends Application {
         imageViewClick2 = (ImageView)e.getSource();
         
         if( imageViewClick1 == imageViewClick2) {
+            if(!imageViewClick2.getImage().getUrl().toString().contains("turrned.png")){
+                nrOfClicks = 1;
+                return;
+            }
             nrOfClicks = 0;
 
             imageViewClick1.setImage(new Card(card1.getInvisibleCardSource(), card1.getVisibleCardSource()));
