@@ -1,12 +1,18 @@
 package Views;
 
+import java.util.Optional;
+import java.util.Set;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -174,7 +180,7 @@ public class OptionsView {
         layout.getChildren().add(backButton);
     }
 
-    private void createButtonEvents(Button btn) {
+    public void createButtonEvents(Button btn) {
 
         String btnId = btn.getId();
 
@@ -189,7 +195,7 @@ public class OptionsView {
             }
                 return;
             case "startBtn": {
-                startGameBtn.setOnMouseReleased(e -> {
+                btn.setOnMouseReleased(e -> {
                     String[] playerNames = new String[playerTxtFields.length];
 
                     for (int i = 0; i < playerTxtFields.length; i++) {
@@ -204,9 +210,25 @@ public class OptionsView {
                 return;
             }
             case "backBtn": {
-                backButton.setOnMouseClicked(e -> backToOptions1());
+                btn.setOnMouseClicked(e -> backToOptions1());
                 return;
             }
+            case "startNewGameBtn": {
+                btn.setOnMouseReleased(e -> {
+
+                    Alert alert = new Alert(AlertType.CONFIRMATION);
+                    alert.setHeaderText("Alert");
+                    alert.setContentText("Are you sure?");
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK){
+                        backToOptions1();
+                    } else {
+                        return;
+                    } 
+                });
+                return;
+            }
+
             default:
                 return;
         }
