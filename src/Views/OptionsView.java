@@ -210,7 +210,6 @@ public class OptionsView {
             default:
                 return;
         }
-
     }
 
     private void createGotoOptions2ButtonEvent() {
