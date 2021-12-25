@@ -18,6 +18,7 @@ public class OptionsView {
 
     private Stage window;
     BoardView boardView;
+    VBox layout;
     TextField nrOfPlayersTextField;
     TextField[] playerTxtFields;
     ComboBox<String> nrOfCardsBox;
@@ -81,8 +82,56 @@ public class OptionsView {
         }
     }
 
-    private ImageView getLogo() {
+    private VBox buildOptionsLayout1(VBox layout, Label nrOfPlayerslabel,
+            TextField nrOfPlayersTextField2, Label nrOfCards, ComboBox<String> nrOfCardsBox2) {
 
+        configureLayout(layout);
+
+        addMemoryGameLogo(layout);
+
+        layout.getChildren().addAll(nrOfPlayerslabel, nrOfPlayersTextField, nrOfCards, nrOfCardsBox);
+
+        createOptions2Btn(layout);
+
+        return layout;
+    }
+
+    private void configureLayout(VBox layout) {
+        layout.setPadding(new Insets(10, 10, 10, 10));
+        layout.setSpacing(17);
+        layout.setAlignment(Pos.CENTER);
+    }
+
+    private void createOptions2Btn(VBox layout) {
+        goToOptions2Btn = new Button("Continue!");
+
+        goToOptions2Btn.setId("optionsBtn");
+        goToOptions2Btn.setMinWidth(100);
+        createButtonEvents(goToOptions2Btn);
+
+        layout.getChildren().add(goToOptions2Btn);
+    }
+
+    private void buildOptionsLayout2(int nrOfPlayers, int rows, int cols) {
+        boardView = new BoardView(window);
+        layout = new VBox();
+
+        configureLayout(layout);
+
+        addMemoryGameLogo(layout);
+
+        createBackButton(layout);
+
+        createPlayerLabelsAndFields(layout, nrOfPlayers);
+
+        createStartButton(layout);
+
+        Scene optionsScene2 = new Scene(layout, optionsLayoutWidth, optionsLayoutHeight);
+
+        boardView.openNewView(window, optionsScene2);
+    }
+
+    private void addMemoryGameLogo(VBox layout) {
         ImageView logo = new ImageView();
 
         try {
@@ -92,50 +141,20 @@ public class OptionsView {
             System.out.println(e);
         }
 
-        return logo;
+        layout.getChildren().add(logo);
     }
 
-    private VBox buildOptionsLayout1(VBox layout, Label nrOfPlayerslabel,
-            TextField nrOfPlayersTextField2, Label nrOfCards, ComboBox<String> nrOfCardsBox2) {
+    private void createStartButton(VBox layout) {
+        startGameBtn = new Button("Start Game!");
+        startGameBtn.setId("startBtn");;
+        startGameBtn.setMinWidth(100);
+        createButtonEvents(startGameBtn);
 
-        layout.setPadding(new Insets(10, 10, 10, 10));
-        layout.setSpacing(17);
-        layout.setAlignment(Pos.CENTER);
-
-        ImageView iconImage = getLogo();
-
-        goToOptions2Btn = new Button("Continue!");
-        goToOptions2Btn.setId("optionsBtn");
-        goToOptions2Btn.setMinWidth(100);
-
-        layout.getChildren().addAll(iconImage, nrOfPlayerslabel, nrOfPlayersTextField, nrOfCards, nrOfCardsBox,
-                goToOptions2Btn);
-
-        createButtonEvents(goToOptions2Btn);
-
-        return layout;
+        layout.getChildren().add(startGameBtn);
     }
 
-    private void buildOptionsLayout2(int nrOfPlayers, int rows, int cols) {
-        boardView = new BoardView(window);
-        VBox layout = new VBox();
-
-        layout.setPadding(new Insets(10, 10, 10, 10));
-        layout.setSpacing(10);
-        layout.setAlignment(Pos.CENTER);
-
-        ImageView iconImage = getLogo();
-        Label playerLbl;
-
-        layout.getChildren().add(iconImage);
-
-        backButton = new Button("Go Back");
-        backButton.setId("backBtn");
-        backButton.setMinWidth(100);
-        createButtonEvents(backButton);
-
-        layout.getChildren().add(backButton);
-
+    private void createPlayerLabelsAndFields(VBox layout, int nrOfPlayers) {
+        Label playerLbl = new Label();
         playerTxtFields = new TextField[nrOfPlayers];
         for (int i = 0; i < nrOfPlayers; i++) {
             playerLbl = new Label("Choose player " + (i + 1) + " name:");
@@ -143,17 +162,16 @@ public class OptionsView {
             playerTxtFields[i].setMaxWidth(150.0);
             layout.getChildren().addAll(playerLbl, playerTxtFields[i]);
         }
+    }
 
-        startGameBtn = new Button("Start Game!");
-        startGameBtn.setId("startBtn");;
-        startGameBtn.setMinWidth(100);
-        createButtonEvents(startGameBtn);
+    private void createBackButton(VBox layout) {
+        backButton = new Button("Go Back");
 
-        layout.getChildren().add(startGameBtn);
+        backButton.setId("backBtn");
+        backButton.setMinWidth(100);
+        createButtonEvents(backButton);
 
-        Scene optionsScene2 = new Scene(layout, optionsLayoutWidth, optionsLayoutHeight);
-
-        boardView.openNewView(window, optionsScene2);
+        layout.getChildren().add(backButton);
     }
 
     private void createButtonEvents(Button btn) {
@@ -163,18 +181,10 @@ public class OptionsView {
         switch (btnId) {
             case "optionsBtn": {
                 nrOfPlayersTextField.setOnKeyReleased(e -> {
-                    int nrOfPlayers = Integer.parseInt(nrOfPlayersTextField.getText());
-                    int rows = getNrOfRows(nrOfCardsBox);
-                    int cols = getNrOfCols(nrOfCardsBox);
-
-                    goToOptions2Btn.setOnMouseReleased(ev -> buildOptionsLayout2(nrOfPlayers, rows, cols));
+                    createGotoOptions2ButtonEvent();
                 });
                 nrOfCardsBox.setOnAction(e -> {
-                    int nrOfPlayers = Integer.parseInt(nrOfPlayersTextField.getText());
-                    int rows = getNrOfRows(nrOfCardsBox);
-                    int cols = getNrOfCols(nrOfCardsBox);
-
-                    goToOptions2Btn.setOnMouseReleased(ev -> buildOptionsLayout2(nrOfPlayers, rows, cols));
+                    createGotoOptions2ButtonEvent();
                 });
             }
                 return;
@@ -201,6 +211,14 @@ public class OptionsView {
                 return;
         }
 
+    }
+
+    private void createGotoOptions2ButtonEvent() {
+        int nrOfPlayers = Integer.parseInt(nrOfPlayersTextField.getText());
+        int rows = getNrOfRows(nrOfCardsBox);
+        int cols = getNrOfCols(nrOfCardsBox);
+
+        goToOptions2Btn.setOnMouseReleased(ev -> buildOptionsLayout2(nrOfPlayers, rows, cols));
     }
 
     private void backToOptions1() {
