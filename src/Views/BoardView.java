@@ -26,6 +26,7 @@ public class BoardView {
     Scene optionsScene;
     VBox optionsLayout1;
     Player[] players;
+    Button endGameButton, starNewGameButton;
     int gameBoardWidth = 1000, gameBoardHeight = 500;
     int optionsLayoutWidth = 500, optionsLayoutHeight = 500;
     int leftPaneWidth = 250;
@@ -70,21 +71,28 @@ public class BoardView {
             playerNameLabels[i].setAlignment(Pos.CENTER);
             playerNameLabels[i].setFont(new Font("Roman", 24));
 
-            playerNameLabels[i].setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,
+            playerNameLabels[i].setBorder(new Border(new BorderStroke(Color.BLUE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,
             BorderWidths.DEFAULT)));
         }
 
         leftGameBoardPane.getChildren().addAll(playerNameLabels);
 
-        Button endGameButton = new Button("End Game!");
-        endGameButton.setMinSize(leftPaneWidth, 50);
+        endGameButton = createButton("End Game!");
         leftGameBoardPane.getChildren().addAll(endGameButton);
-        Button starNewGameButton = new Button("End Game!");
-        starNewGameButton.setMinSize(leftPaneWidth, 50);
+        
+        starNewGameButton = createButton("Start New Game");
         leftGameBoardPane.getChildren().addAll(starNewGameButton);
+        
 
         Scene gameScene = new Scene(leftGameBoardPane, gameBoardWidth, gameBoardHeight);
 
         openNewView(window, gameScene);
+    }
+
+    private Button createButton(String buttonText) {
+        Button btn = new Button();
+        btn.setMinSize(leftPaneWidth, 50);
+        btn.setText(buttonText);
+        return btn;
     }
 }
