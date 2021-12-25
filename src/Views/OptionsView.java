@@ -105,6 +105,7 @@ public class OptionsView {
         ImageView iconImage = getLogo();
 
         goToOptions2Btn = new Button("Continue!");
+        goToOptions2Btn.setId("optionsBtn");
         goToOptions2Btn.setMinWidth(100);
 
         layout.getChildren().addAll(iconImage, nrOfPlayerslabel, nrOfPlayersTextField, nrOfCards, nrOfCardsBox,
@@ -129,6 +130,7 @@ public class OptionsView {
         layout.getChildren().add(iconImage);
 
         backButton = new Button("Go Back");
+        backButton.setId("backBtn");
         backButton.setMinWidth(100);
         createButtonEvents(backButton);
 
@@ -143,6 +145,7 @@ public class OptionsView {
         }
 
         startGameBtn = new Button("Start Game!");
+        startGameBtn.setId("startBtn");;
         startGameBtn.setMinWidth(100);
         createButtonEvents(startGameBtn);
 
@@ -155,10 +158,10 @@ public class OptionsView {
 
     private void createButtonEvents(Button btn) {
 
-        String btnText = btn.getText();
+        String btnId = btn.getId();
 
-        switch (btnText) {
-            case "Continue!": {
+        switch (btnId) {
+            case "optionsBtn": {
                 nrOfPlayersTextField.setOnKeyReleased(e -> {
                     int nrOfPlayers = Integer.parseInt(nrOfPlayersTextField.getText());
                     int rows = getNrOfRows(nrOfCardsBox);
@@ -175,7 +178,7 @@ public class OptionsView {
                 });
             }
                 return;
-            case "Start Game!": {
+            case "startBtn": {
                 startGameBtn.setOnMouseReleased(e -> {
                     String[] playerNames = new String[playerTxtFields.length];
 
@@ -190,7 +193,7 @@ public class OptionsView {
                 });
                 return;
             }
-            case "Go Back": {
+            case "backBtn": {
                 backButton.setOnMouseClicked(e -> backToOptions1());
                 return;
             }
