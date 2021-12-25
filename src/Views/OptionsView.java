@@ -1,7 +1,6 @@
 package Views;
 
 import java.util.Optional;
-import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -217,8 +216,7 @@ public class OptionsView {
                 btn.setOnMouseReleased(e -> {
 
                     Alert alert = new Alert(AlertType.CONFIRMATION);
-                    alert.setHeaderText("Alert");
-                    alert.setContentText("Are you sure?");
+                    alert.setHeaderText("Are you sure?");
 
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == ButtonType.OK){
@@ -233,8 +231,7 @@ public class OptionsView {
                 btn.setOnMouseReleased(e -> {
 
                     Alert alert = new Alert(AlertType.CONFIRMATION);
-                    alert.setHeaderText("Alert");
-                    alert.setContentText("End Game?");
+                    alert.setHeaderText("End Game?");
                     
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == ButtonType.OK){
