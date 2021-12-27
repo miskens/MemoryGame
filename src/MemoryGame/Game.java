@@ -53,13 +53,9 @@ public class Game extends Application {
         Random random = new Random();
         currentPlayer = players[random.nextInt(players.length)];
         currentPlayer.setActive(true);
-<<<<<<< HEAD
-        setActivePlayerColor();
-=======
 
         setActivePlayerColor();
 
->>>>>>> main
         boardView.openNewView(window, gameScene);
     }
 
@@ -108,39 +104,6 @@ public class Game extends Application {
         imageViewClick2.setImage(new Card(card2.getVisibleCardSource()));
         secondCardName = card2.getVisibleCardSource();
 
-<<<<<<< HEAD
-            if(firstCardName.equals(secondCardName)) {
-                
-                PauseTransition pause = new PauseTransition(Duration.seconds((1)));
-                pause.setOnFinished(ev -> {
-                    imageViewClick1.setVisible(false); 
-                    imageViewClick2.setVisible(false);
-                    nrOfClicks = 0;
-                    this.currentPlayer.addPoint();
-                    System.out.println(currentPlayer.getPoints());
-
-                });
-                pause.play();
-
-                // DONE!  Wait 1 second, then eliminate(remove them from the game) and 
-                // TODO: give 1 points to the player
-            }
-            else {
-                // DONE!  Show 2 seconds then hide them ( set invisible )
-                // TODO: and change to next player!
-
-                PauseTransition pause = new PauseTransition(Duration.seconds((2)));
-                pause.setOnFinished(ev -> {
-                    Card copyCard1 = new Card(card1.getInvisibleCardSource(), card1.getVisibleCardSource());
-                    imageViewClick1.setImage(copyCard1);
-                    Card copyCard2 = new Card(card2.getInvisibleCardSource(), card2.getVisibleCardSource());
-                    imageViewClick2.setImage(copyCard2);
-                    nrOfClicks = 0;
-                });
-                pause.play();
-                System.out.println(currentPlayer);
-            }
-=======
         if (firstCardName.equals(secondCardName)) {
 
             PauseTransition pause = new PauseTransition(Duration.seconds((1)));
@@ -180,6 +143,5 @@ public class Game extends Application {
         }
 
         return currentPlayer;
->>>>>>> main
     }
 }
