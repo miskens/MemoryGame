@@ -53,9 +53,8 @@ public class Game extends Application {
         Random random = new Random();
         currentPlayer = players[random.nextInt(players.length)];
         currentPlayer.setActive(true);
-
         setActivePlayerColor();
-
+        
         boardView.openNewView(window, gameScene);
     }
 
@@ -111,14 +110,12 @@ public class Game extends Application {
                 imageViewClick1.setVisible(false);
                 imageViewClick2.setVisible(false);
                 nrOfClicks = 0;
+                currentPlayer.addPoint();
             });
             pause.play();
 
-            // DONE! Wait 1 second, then eliminate(remove them from the game) and
-            // TODO: give 2 points to the player
         } else {
-            // DONE! Show 2 seconds then hide them ( set invisible )
-            // TODO: and change to next player!
+
 
             PauseTransition pause = new PauseTransition(Duration.seconds((2)));
             pause.setOnFinished(ev -> {
