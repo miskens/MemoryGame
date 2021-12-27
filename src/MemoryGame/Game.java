@@ -135,8 +135,12 @@ public class Game extends Application {
 
         if (currentPlayer.getPlayerNr() == 1) {
             currentPlayer = players[1];
+            playerLabels[1].setStyle("-fx-background-color: lightgreen;");
+            playerLabels[0].setStyle("-fx-background-color: aliceblue;");
         } else {
             currentPlayer = players[0];
+            playerLabels[1].setStyle("-fx-background-color: aliceblue;");
+            playerLabels[0].setStyle("-fx-background-color: lightgreen;");
         }
 
         return currentPlayer;
