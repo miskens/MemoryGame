@@ -33,8 +33,8 @@ public class Player {
     public int getPoints() {
         return points;
     }
-    public void setPoints(int points){
-        this.points = points;
+    public void addPoint(){
+        this.points++;
     }
 
     public int getPlayerNr() {

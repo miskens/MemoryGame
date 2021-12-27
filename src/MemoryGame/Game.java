@@ -2,6 +2,11 @@ package MemoryGame;
 
 import java.util.Random;
 
+import javax.swing.event.SwingPropertyChangeSupport;
+import javax.swing.plaf.synth.SynthOptionPaneUI;
+import javax.swing.plaf.synth.SynthScrollBarUI;
+import javax.swing.plaf.synth.SynthStyleFactory;
+
 import Views.BoardView;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -45,11 +50,9 @@ public class Game extends Application {
         boardView = new BoardView(window);
         
         Random random = new Random();
-        Player currentPlayer = players[random.nextInt(players.length)];
+        currentPlayer = players[random.nextInt(players.length)];
         currentPlayer.setActive(true);
-        
         setActivePlayerColor();
- 
         boardView.openNewView(window, gameScene);
     }
 
@@ -107,11 +110,14 @@ public class Game extends Application {
                     imageViewClick1.setVisible(false); 
                     imageViewClick2.setVisible(false);
                     nrOfClicks = 0;
+                    this.currentPlayer.addPoint();
+                    System.out.println(currentPlayer.getPoints());
+
                 });
                 pause.play();
 
                 // DONE!  Wait 1 second, then eliminate(remove them from the game) and 
-                // TODO: give 2 points to the player
+                // TODO: give 1 points to the player
             }
             else {
                 // DONE!  Show 2 seconds then hide them ( set invisible )
@@ -126,6 +132,7 @@ public class Game extends Application {
                     nrOfClicks = 0;
                 });
                 pause.play();
+                System.out.println(currentPlayer);
             }
     }
 }
