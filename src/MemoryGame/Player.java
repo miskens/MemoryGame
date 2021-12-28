@@ -44,4 +44,8 @@ public class Player {
     public static int getNrOfPlayers() {
         return numberOfPlayers;
     }
+
+    public static void resetNrOfPlayers() {
+        numberOfPlayers = 0;
+    }
 }
