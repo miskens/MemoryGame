@@ -2,15 +2,12 @@ package MemoryGame;
 
 import java.util.Random;
 
-import javax.swing.event.SwingPropertyChangeSupport;
-import javax.swing.plaf.synth.SynthOptionPaneUI;
-import javax.swing.plaf.synth.SynthScrollBarUI;
-import javax.swing.plaf.synth.SynthStyleFactory;
-
 import Views.BoardView;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -29,6 +26,7 @@ public class Game extends Application {
     Player[] players;
     Label[] playerLabels;
     Player currentPlayer;
+    int nrOfCards;
 
     public static void main(String[] args) throws Exception {
         launch(args);
@@ -43,7 +41,8 @@ public class Game extends Application {
     }
 
     public void PlayGame(Stage window, BoardView boardview, GridPane fullGameBoard, Player[] players,
-            Label[] playerLabels) {
+            Label[] playerLabels, int nrOfCards) {
+        this.nrOfCards = nrOfCards;
         this.playerLabels = playerLabels;
         this.players = players;
         gameScene = new Scene(fullGameBoard);
@@ -110,13 +109,32 @@ public class Game extends Application {
                 imageViewClick1.setVisible(false);
                 imageViewClick2.setVisible(false);
                 nrOfClicks = 0;
-                currentPlayer.addPoint();
             });
             pause.play();
 
+            currentPlayer.addPoint();
+                playerLabels[currentPlayer.getPlayerNr() -1].setText(currentPlayer.getPlayerName() + "\n" + 
+                        currentPlayer.getPoints());
+            nrOfCards -= 2;
+            if(nrOfCards == 0){
+                String winner = "";
+                Alert alert = new Alert(AlertType.INFORMATION);
+                if(players[0].getPoints() == players[1].getPoints()){
+                    winner = ("It was a draw!");
+                    alert.setContentText(winner + "\n Good game!");
+                }
+                else if(players[0].getPoints() > players[1].getPoints()){
+                    winner = players[0].getPlayerName();
+                    alert.setContentText(winner + " is the winner!\n Congratulations!!");
+                }
+                else{
+                    winner = players[1].getPlayerName();
+                    alert.setContentText(winner + " is the winner!\n Congratulations!!");
+                }
+                alert.showAndWait();
+                System.exit(0);
+            }
         } else {
-
-
             PauseTransition pause = new PauseTransition(Duration.seconds((2)));
             pause.setOnFinished(ev -> {
                 Card copyCard1 = new Card(card1.getInvisibleCardSource(), card1.getVisibleCardSource());
