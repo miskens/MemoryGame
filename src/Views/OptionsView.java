@@ -30,12 +30,12 @@ public class OptionsView {
     Button goToOptions2Btn, startGameBtn, backButton;
     int optionsLayoutWidth = 500, optionsLayoutHeight = 500;
 
-    public OptionsView(Stage window) {
-        this.window = window;
+    public OptionsView() {
+        
     }
 
-    public VBox createOptionsLayout() {
-
+    public VBox createOptionsLayout(Stage window) {
+        this.window = window;
         Label nrOfPlayerslabel = new Label("Choose number of players: "); // Will start with functionality for 2 players
                                                                           // only initially (2-4 if we have time)
         nrOfPlayersTextField = new TextField();
@@ -54,8 +54,8 @@ public class OptionsView {
         return layout;
     }
 
-    private int getNrOfRows(ComboBox<String> nrOfCardsBox) {
-        switch (nrOfCardsBox.getValue()) {
+    public int getNrOfRows(String gameboardGridSize) {
+        switch (gameboardGridSize) {
             case "3x4":
                 return 3;
             case "4x4":
@@ -71,8 +71,8 @@ public class OptionsView {
         }
     }
 
-    private int getNrOfCols(ComboBox<String> nrOfCardsBox) {
-        switch (nrOfCardsBox.getValue()) {
+    public int getNrOfCols(String gameboardGridSize) {
+        switch (gameboardGridSize) {
             case "3x4":
             case "4x4":
                 return 4;
@@ -200,9 +200,10 @@ public class OptionsView {
                     for (int i = 0; i < playerTxtFields.length; i++) {
                         playerNames[i] = playerTxtFields[i].getText();
                     }
-
-                    int rows = getNrOfRows(nrOfCardsBox);
-                    int cols = getNrOfCols(nrOfCardsBox);
+                    
+                    String gameboardGridSize = nrOfCardsBox.getValue();
+                    int rows = getNrOfRows(gameboardGridSize);
+                    int cols = getNrOfCols(gameboardGridSize);
 
                     boardView.buildGameboard(playerNames, rows, cols);
                 });
@@ -250,14 +251,15 @@ public class OptionsView {
 
     private void createGotoOptions2ButtonEvent() {
         int nrOfPlayers = Integer.parseInt(nrOfPlayersTextField.getText());
-        int rows = getNrOfRows(nrOfCardsBox);
-        int cols = getNrOfCols(nrOfCardsBox);
+        String gameboardGridSize = nrOfCardsBox.getValue();
+        int rows = getNrOfRows(gameboardGridSize);
+        int cols = getNrOfCols(gameboardGridSize);
 
         goToOptions2Btn.setOnMouseReleased(ev -> buildOptionsLayout2(nrOfPlayers, rows, cols));
     }
 
     private void backToOptions1() {
-        VBox layout = createOptionsLayout();
+        VBox layout = createOptionsLayout(window);
         BoardView boardView = new BoardView(window);
         Scene scene = new Scene(layout, optionsLayoutWidth, optionsLayoutHeight);
         boardView.openNewView(window, scene);

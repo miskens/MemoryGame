@@ -7,7 +7,6 @@ import Views.BoardView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
@@ -57,12 +56,12 @@ public class Game extends Application {
         Random random = new Random();
         currentPlayer = players[random.nextInt(players.length)];
         currentPlayer.setActive(true);
-        setActivePlayerColor();
+        setActivePlayerColor(players, playerLabels);
         
         boardView.openNewView(window, gameScene);
     }
 
-    private void setActivePlayerColor() {
+    public void setActivePlayerColor(Player[] players, Label[] playerLabels) {
         for (int i = 0; i < playerLabels.length; i++) {
             if (players[i].getActive() == true) {
                 playerLabels[i].setStyle("-fx-background-color: lightgreen;");
@@ -109,17 +108,13 @@ public class Game extends Application {
 
         if (firstCardName.equals(secondCardName)) {
 
-            PauseTransition pause = new PauseTransition(Duration.seconds((1)));
-            pause.setOnFinished(ev -> {
-                imageViewClick1.setVisible(false);
-                imageViewClick2.setVisible(false);
-                nrOfClicks = 0;
-            });
-            pause.play();
+            pauseThenHideCards();
 
             currentPlayer.addPoint();
-                playerLabels[currentPlayer.getPlayerNr() -1].setText(currentPlayer.getPlayerName() + "\n" + 
+
+            playerLabels[currentPlayer.getPlayerNr() -1].setText(currentPlayer.getPlayerName() + "\n" + 
                         currentPlayer.getPoints());
+
             nrOfCards -= 2;
             if(nrOfCards == 0){
                 announceWinner(); 
@@ -139,12 +134,23 @@ public class Game extends Application {
         }
     }
 
+    private void pauseThenHideCards() {
+        PauseTransition pause = new PauseTransition(Duration.seconds((1)));
+            pause.setOnFinished(ev -> {
+                imageViewClick1.setVisible(false);
+                imageViewClick2.setVisible(false);
+                nrOfClicks = 0;
+            });
+            pause.play();
+    }
+
     private void announceWinner() {
         String winner = "";
+
         ButtonType newGameButton = new ButtonType("New Game", ButtonData.OK_DONE);
         ButtonType endGamebutton = new ButtonType("Close Game", ButtonData.CANCEL_CLOSE);
         
-        Alert alert = new Alert(AlertType.CONFIRMATION, winner, endGamebutton, newGameButton); // endGamebutton, newGameButton
+        Alert alert = new Alert(AlertType.CONFIRMATION, winner, endGamebutton, newGameButton);
         Image img;
         ImageView alertImageView = new ImageView();
     
@@ -163,6 +169,7 @@ public class Game extends Application {
                 winner = players[1].getPlayerName();
                 alert.setContentText(winner + " is the winner!\n Congratulations!!");
             }
+
         Player.resetNrOfPlayers();
 
         alertImageView.setImage(img);
