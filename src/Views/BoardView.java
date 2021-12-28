@@ -56,9 +56,9 @@ public class BoardView {
     public void openStarPage() {
         window.setTitle("Memory Game Fun!!");
 
-        OptionsView optionsView = new OptionsView(window);
+        OptionsView optionsView = new OptionsView();
 
-        optionsLayout1 = optionsView.createOptionsLayout();
+        optionsLayout1 = optionsView.createOptionsLayout(window);
 
         optionsScene = new Scene(optionsLayout1, optionsLayoutWidth, optionsLayoutHeight);
 
@@ -71,7 +71,7 @@ public class BoardView {
     }
 
     public void buildGameboard(String[] playerNames, int rows, int cols) {
-        OptionsView optionsView = new OptionsView(window);
+        OptionsView optionsView = new OptionsView();
 
         FlowPane leftGameBoardPane = createLeftGameBoardPane();
 
