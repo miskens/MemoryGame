@@ -111,6 +111,8 @@ public class Game extends Application {
                 imageViewClick2.setVisible(false);
                 nrOfClicks = 0;
                 currentPlayer.addPoint();
+                playerLabels[currentPlayer.getPlayerNr()-1].setText(currentPlayer.getPlayerName() + "\n" +
+                currentPlayer.getPoints());
             });
             pause.play();
 
