@@ -117,22 +117,7 @@ public class Game extends Application {
                         currentPlayer.getPoints());
             nrOfCards -= 2;
             if(nrOfCards == 0){
-                String winner = "";
-                Alert alert = new Alert(AlertType.INFORMATION);
-                if(players[0].getPoints() == players[1].getPoints()){
-                    winner = ("It was a draw!");
-                    alert.setContentText(winner + "\n Good game!");
-                }
-                else if(players[0].getPoints() > players[1].getPoints()){
-                    winner = players[0].getPlayerName();
-                    alert.setContentText(winner + " is the winner!\n Congratulations!!");
-                }
-                else{
-                    winner = players[1].getPlayerName();
-                    alert.setContentText(winner + " is the winner!\n Congratulations!!");
-                }
-                alert.showAndWait();
-                System.exit(0);
+                announceWinner(); 
             }
         } else {
             PauseTransition pause = new PauseTransition(Duration.seconds((2)));
@@ -147,6 +132,25 @@ public class Game extends Application {
             });
             pause.play();
         }
+    }
+
+    private void announceWinner() {
+        String winner = "";
+        Alert alert = new Alert(AlertType.INFORMATION);
+        if(players[0].getPoints() == players[1].getPoints()){
+            winner = ("It was a draw!");
+            alert.setContentText(winner + "\n Good game!");
+            }
+            else if(players[0].getPoints() > players[1].getPoints()){
+                winner = players[0].getPlayerName();
+                alert.setContentText(winner + " is the winner!\n Congratulations!!");
+            }
+            else{
+                winner = players[1].getPlayerName();
+                alert.setContentText(winner + " is the winner!\n Congratulations!!");
+            }
+        alert.showAndWait();
+        System.exit(0);
     }
 
     private Player nextPlayer(Player currentPlayer) {
