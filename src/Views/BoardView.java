@@ -44,8 +44,8 @@ public class BoardView {
     Button endGameButton, startNewGameButton;
     ImageView imageView;
     Card card1, card2;
+    int nrOfCards;
     String firstCardName, secondCardName;
-    //int gameBoardWidth = 1000, gameBoardHeight = 500;
     int optionsLayoutWidth = 500, optionsLayoutHeight = 500;
     int leftPaneWidth = 250;
 
@@ -89,7 +89,7 @@ public class BoardView {
 
         fullGameBoard.getChildren().addAll(leftGameBoardPane, cardsGrid);
         
-        game.PlayGame(window, this, fullGameBoard, players, playerNameLabels);
+        game.PlayGame(window, this, fullGameBoard, players, playerNameLabels, nrOfCards);
     }
 
     private void configureGameBoard(GridPane fullGameBoard) {
@@ -167,6 +167,7 @@ public class BoardView {
         GridPane gridPaneLayout = new GridPane();
 
         Card[] cards = new Card[rows * cols];
+        nrOfCards = cards.length;
 
         for (int i = 0; i < cards.length; i++) {
             int randomNr = random.nextInt(25) + 1;
