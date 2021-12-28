@@ -1,13 +1,18 @@
 package MemoryGame;
 
+import java.util.Optional;
 import java.util.Random;
 
 import Views.BoardView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -136,21 +141,41 @@ public class Game extends Application {
 
     private void announceWinner() {
         String winner = "";
-        Alert alert = new Alert(AlertType.INFORMATION);
+        ButtonType newGameButton = new ButtonType("New Game", ButtonData.OK_DONE);
+        ButtonType endGamebutton = new ButtonType("Close Game", ButtonData.CANCEL_CLOSE);
+        
+        Alert alert = new Alert(AlertType.CONFIRMATION, winner, endGamebutton, newGameButton); // endGamebutton, newGameButton
+        Image img;
+        ImageView alertImageView = new ImageView();
+    
         if(players[0].getPoints() == players[1].getPoints()){
+            img = new Image("Icons/draw.png");
             winner = ("It was a draw!");
             alert.setContentText(winner + "\n Good game!");
             }
             else if(players[0].getPoints() > players[1].getPoints()){
+                img = new Image("Icons/p1wins.png");
                 winner = players[0].getPlayerName();
                 alert.setContentText(winner + " is the winner!\n Congratulations!!");
             }
             else{
+                img = new Image("Icons/p2wins.png");
                 winner = players[1].getPlayerName();
                 alert.setContentText(winner + " is the winner!\n Congratulations!!");
             }
-        alert.showAndWait();
-        System.exit(0);
+        Player.resetNrOfPlayers();
+
+        alertImageView.setImage(img);
+        alert.setGraphic(alertImageView);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        ButtonType btn = result.orElse(result.get());
+        if(btn.getButtonData() == ButtonData.CANCEL_CLOSE) {
+            System.exit(0);
+        }
+        else if(btn.getButtonData() == ButtonData.OK_DONE){
+            boardView.openStarPage();
+        }
     }
 
     private Player nextPlayer(Player currentPlayer) {
