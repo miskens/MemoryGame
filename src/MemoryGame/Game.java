@@ -56,18 +56,19 @@ public class Game extends Application {
         Random random = new Random();
         currentPlayer = players[random.nextInt(players.length)];
         currentPlayer.setActive(true);
-        setActivePlayerColor(players, playerLabels);
+        // setActivePlayerColor(players, playerLabels);
+        for (int i = 0; i < playerLabels.length; i++) {
+            playerLabels[i].setStyle(getLabelColor(players[i]));
+        }
         
         boardView.openNewView(window, gameScene);
     }
 
-    public void setActivePlayerColor(Player[] players, Label[] playerLabels) {
-        for (int i = 0; i < playerLabels.length; i++) {
-            if (players[i].getActive() == true) {
-                playerLabels[i].setStyle("-fx-background-color: lightgreen;");
-            } else {
-                playerLabels[i].setStyle("-fx-background-color: aliceblue;");
-            }
+    public String getLabelColor(Player player) {
+        if (player.getActive() == true) {
+            return "-fx-background-color: lightgreen;";
+        } else {
+            return "-fx-background-color: aliceblue;";
         }
     }
 
@@ -150,7 +151,7 @@ public class Game extends Application {
         ButtonType newGameButton = new ButtonType("New Game", ButtonData.OK_DONE);
         ButtonType endGamebutton = new ButtonType("Close Game", ButtonData.CANCEL_CLOSE);
         
-        Alert alert = new Alert(AlertType.CONFIRMATION, winner, endGamebutton, newGameButton);
+        Alert alert = new Alert(AlertType.NONE, winner, endGamebutton, newGameButton);
         Image img;
         ImageView alertImageView = new ImageView();
     
