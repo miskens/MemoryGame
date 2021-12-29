@@ -88,4 +88,21 @@ public class GameTest {
         // Assert
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void testColorForActivePlayerShouldBeAliceBlue() {
+        // Setup
+        Game game = new Game();
+        Player player = new Player("test player");
+        player.setActive(false);
+
+        // Actual
+        String actual = game.getLabelColor(player);
+
+        // Expected
+        String expected = "-fx-background-color: aliceblue;";
+
+        // Assert
+        Assert.assertEquals(expected, actual);
+    }
 }
