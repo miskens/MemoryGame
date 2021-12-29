@@ -2,6 +2,8 @@ package Test;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import MemoryGame.Game;
 import MemoryGame.Player;
 import Views.OptionsView;
 
@@ -68,5 +70,22 @@ public class GameTest {
 
         // Assert is true
         Assert.assertArrayEquals(expecteds, actuals);
+    }
+
+    @Test
+    public void testColorForActivePlayerShouldBeLightGreen() {
+        // Setup
+        Game game = new Game();
+        Player player = new Player("test player");
+        player.setActive(true);
+
+        // Actual
+        String actual = game.getLabelColor(player);
+
+        // Expected
+        String expected = "-fx-background-color: lightgreen;";
+
+        // Assert
+        Assert.assertEquals(expected, actual);
     }
 }
