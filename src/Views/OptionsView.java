@@ -36,8 +36,8 @@ public class OptionsView {
 
     public VBox createOptionsLayout(Stage window) {
         this.window = window;
-        Label nrOfPlayerslabel = new Label("Choose number of players: "); // Will start with functionality for 2 players
-                                                                          // only initially (2-4 if we have time)
+        Label nrOfPlayerslabel = new Label("Choose number of players: ");
+
         nrOfPlayersTextField = new TextField();
         nrOfPlayersTextField.setMaxWidth(40.0);
 
@@ -110,7 +110,7 @@ public class OptionsView {
     private void createOptions2Btn(VBox layout) {
         goToOptions2Btn = new Button("Continue!");
 
-        goToOptions2Btn.setId("optionsBtn");
+        goToOptions2Btn.setId("options2Btn");
         goToOptions2Btn.setMinWidth(100);
         createButtonEvents(goToOptions2Btn);
 
@@ -184,7 +184,7 @@ public class OptionsView {
         String btnId = btn.getId();
 
         switch (btnId) {
-            case "optionsBtn": {
+            case "options2Btn": {
                 nrOfPlayersTextField.setOnKeyReleased(e -> {
                     createGotoOptions2ButtonEvent();
                 });
@@ -250,7 +250,24 @@ public class OptionsView {
     }
 
     private void createGotoOptions2ButtonEvent() {
-        int nrOfPlayers = Integer.parseInt(nrOfPlayersTextField.getText());
+
+        int nrOfPlayers;
+        Alert alert = new Alert(AlertType.INFORMATION);
+        try {
+            nrOfPlayers = Integer.parseInt(nrOfPlayersTextField.getText());
+        }
+        catch (NumberFormatException e) {
+            alert.setHeaderText("Number of players should be a numeric value.");
+            alert.showAndWait();
+            return;
+        }
+
+        if (nrOfPlayers < 2 || nrOfPlayers > 3) {   
+            alert.setHeaderText("Number of players should be 2-3.");
+            alert.showAndWait();
+            return;
+        }
+
         String gameboardGridSize = nrOfCardsBox.getValue();
         int rows = getNrOfRows(gameboardGridSize);
         int cols = getNrOfCols(gameboardGridSize);
