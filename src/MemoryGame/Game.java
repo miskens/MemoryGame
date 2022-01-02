@@ -113,8 +113,9 @@ public class Game extends Application {
 
             currentPlayer.addPoint();
 
-            playerLabels[currentPlayer.getPlayerNr() -1].setText(currentPlayer.getPlayerName() + "\n" + 
-                        currentPlayer.getPoints());
+            playerLabels[currentPlayer.getPlayerNr() -1].setText("Player " + currentPlayer.getPlayerNr() + "\n" +
+                                                                            currentPlayer.getPlayerName() + "\n" + 
+                                                                            "Points: " + currentPlayer.getPoints());
 
             nrOfCards -= 2;
             if(nrOfCards == 0){

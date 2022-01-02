@@ -147,8 +147,9 @@ public class BoardView {
 
     public Label configurePlayerLabel(Player player) {
         Label playerLabel = new Label();
-        playerLabel.setText(player.getPlayerName() + "\n" + 
-                            player.getPoints());
+        playerLabel.setText("Player " + player.getPlayerNr() + "\n" +
+                            player.getPlayerName() + "\n" + 
+                            "Points: " + player.getPoints());
    
         playerLabel.setStyle("-fx-background-color: aliceblue;");
         playerLabel.setMinSize(leftPaneWidth, 140);
