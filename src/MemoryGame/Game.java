@@ -189,15 +189,30 @@ public class Game extends Application {
 
     private Player nextPlayer(Player currentPlayer) {
 
-        if (currentPlayer.getPlayerNr() == 1) {
-            currentPlayer = players[1];
-            playerLabels[1].setStyle("-fx-background-color: lightgreen;");
-            playerLabels[0].setStyle("-fx-background-color: aliceblue;");
-        } else {
+        currentPlayer.setActive(false);
+
+        if(currentPlayer.getPlayerNr() == players.length) {
             currentPlayer = players[0];
-            playerLabels[1].setStyle("-fx-background-color: aliceblue;");
-            playerLabels[0].setStyle("-fx-background-color: lightgreen;");
         }
+        else {
+            currentPlayer = players[currentPlayer.getPlayerNr()];
+        }
+
+        currentPlayer.setActive(true);
+
+        for (int i = 0; i < playerLabels.length; i++) {
+            playerLabels[i].setStyle(getLabelColor(players[i]));
+        }
+
+        // if (currentPlayer.getPlayerNr() == 1) {
+        //     currentPlayer = players[1];
+        //     playerLabels[1].setStyle("-fx-background-color: lightgreen;");
+        //     playerLabels[0].setStyle("-fx-background-color: aliceblue;");
+        // } else {
+        //     currentPlayer = players[0];
+        //     playerLabels[1].setStyle("-fx-background-color: aliceblue;");
+        //     playerLabels[0].setStyle("-fx-background-color: lightgreen;");
+        // }
 
         return currentPlayer;
     }
