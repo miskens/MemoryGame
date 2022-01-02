@@ -3,6 +3,7 @@ package Views;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 import MemoryGame.Card;
@@ -13,8 +14,11 @@ import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -135,15 +139,15 @@ public class BoardView {
         startNewGameButton = createButton("Start New Game");
         startNewGameButton.setId("startNewGameBtn");
 
-        optionsView.createButtonEvents(endGameButton);
-        optionsView.createButtonEvents(startNewGameButton);
+        createButtonEvents(endGameButton);
+        createButtonEvents(startNewGameButton);
 
         leftGameBoardPane.getChildren().addAll(endGameButton, startNewGameButton);
     }
 
     public Label configurePlayerLabel(Player player) {
         Label playerLabel = new Label();
-        playerLabel.setText(player.getPlayerName() + "\n" +
+        playerLabel.setText(player.getPlayerName() + "\n" + 
                             player.getPoints());
    
         playerLabel.setStyle("-fx-background-color: aliceblue;");
@@ -200,5 +204,43 @@ public class BoardView {
         }
         
         return gridPaneLayout;
+    }
+
+    public void createButtonEvents(Button btn) {
+
+        String btnId = btn.getId();
+
+        switch(btnId) {
+            case "startNewGameBtn": {
+                btn.setOnMouseReleased(e -> {
+
+                    Alert alert = new Alert(AlertType.CONFIRMATION);
+                    alert.setHeaderText("Are you sure?");
+
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK){
+                        openStarPage();
+                    } else {
+                        return;
+                    } 
+                });
+                return;
+            }
+            case "endGameBtn": {
+                btn.setOnMouseReleased(e -> {
+
+                    Alert alert = new Alert(AlertType.CONFIRMATION);
+                    alert.setHeaderText("End Game?");
+                    
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK){
+                        System.exit(0);
+                    } else {
+                        return;
+                    } 
+                });
+                return;
+            }
+        }
     }
 }

@@ -213,37 +213,6 @@ public class OptionsView {
                 btn.setOnMouseClicked(e -> backToOptions1());
                 return;
             }
-            case "startNewGameBtn": {
-                btn.setOnMouseReleased(e -> {
-
-                    Alert alert = new Alert(AlertType.CONFIRMATION);
-                    alert.setHeaderText("Are you sure?");
-
-                    Optional<ButtonType> result = alert.showAndWait();
-                    if (result.get() == ButtonType.OK){
-                        backToOptions1();
-                    } else {
-                        return;
-                    } 
-                });
-                return;
-            }
-            case "endGameBtn": {
-                btn.setOnMouseReleased(e -> {
-
-                    Alert alert = new Alert(AlertType.CONFIRMATION);
-                    alert.setHeaderText("End Game?");
-                    
-                    Optional<ButtonType> result = alert.showAndWait();
-                    if (result.get() == ButtonType.OK){
-                        System.exit(0);
-                    } else {
-                        return;
-                    } 
-                });
-                return;
-            }
-
             default:
                 return;
         }
