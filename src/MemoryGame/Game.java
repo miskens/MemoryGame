@@ -113,8 +113,9 @@ public class Game extends Application {
 
             currentPlayer.addPoint();
 
-            playerLabels[currentPlayer.getPlayerNr() -1].setText(currentPlayer.getPlayerName() + "\n" + 
-                        currentPlayer.getPoints());
+            playerLabels[currentPlayer.getPlayerNr() -1].setText("Player " + currentPlayer.getPlayerNr() + "\n" +
+                                                                            currentPlayer.getPlayerName() + "\n" + 
+                                                                            "Points: " + currentPlayer.getPoints());
 
             nrOfCards -= 2;
             if(nrOfCards == 0){
@@ -146,33 +147,35 @@ public class Game extends Application {
     }
 
     private void announceWinner() {
-        String winner = "";
+        String winnerText = "";
 
         ButtonType newGameButton = new ButtonType("New Game", ButtonData.OK_DONE);
         ButtonType endGamebutton = new ButtonType("Close Game", ButtonData.CANCEL_CLOSE);
         
-        Alert alert = new Alert(AlertType.NONE, winner, endGamebutton, newGameButton);
+        Alert alert = new Alert(AlertType.NONE, winnerText, endGamebutton, newGameButton);
         Image img;
         ImageView alertImageView = new ImageView();
-    
-        if(players[0].getPoints() == players[1].getPoints()){
+
+        if(players[0].getPoints() > players[1].getPoints() && players[0].getPoints() > players[2].getPoints()) {
+            img = new Image("Icons/p1wins.png");
+            winnerText = players[0].getPlayerName() + " is the winner!\n Congratulations!!";
+        }
+        else if(players[1].getPoints() > players[0].getPoints() && players[1].getPoints() > players[2].getPoints()) {
+            img = new Image("Icons/p2wins.png");
+            winnerText = players[1].getPlayerName() + " is the winner!\n Congratulations!!";
+        }
+        else if(players[2].getPoints() > players[0].getPoints() && players[2].getPoints() > players[1].getPoints()) {
+            img = new Image("Icons/p3wins.png");
+            winnerText = players[2].getPlayerName() + " is the winner!\n Congratulations!!";
+        }
+        else {
             img = new Image("Icons/draw.png");
-            winner = ("It was a draw!");
-            alert.setContentText(winner + "\n Good game!");
-            }
-            else if(players[0].getPoints() > players[1].getPoints()){
-                img = new Image("Icons/p1wins.png");
-                winner = players[0].getPlayerName();
-                alert.setContentText(winner + " is the winner!\n Congratulations!!");
-            }
-            else{
-                img = new Image("Icons/p2wins.png");
-                winner = players[1].getPlayerName();
-                alert.setContentText(winner + " is the winner!\n Congratulations!!");
-            }
+            winnerText = ("It was a draw! \n Good game!");
+        }
 
         Player.resetNrOfPlayers();
 
+        alert.setContentText(winnerText );
         alertImageView.setImage(img);
         alert.setGraphic(alertImageView);
 
@@ -188,14 +191,19 @@ public class Game extends Application {
 
     private Player nextPlayer(Player currentPlayer) {
 
-        if (currentPlayer.getPlayerNr() == 1) {
-            currentPlayer = players[1];
-            playerLabels[1].setStyle("-fx-background-color: lightgreen;");
-            playerLabels[0].setStyle("-fx-background-color: aliceblue;");
-        } else {
+        currentPlayer.setActive(false);
+
+        if(currentPlayer.getPlayerNr() == players.length) {
             currentPlayer = players[0];
-            playerLabels[1].setStyle("-fx-background-color: aliceblue;");
-            playerLabels[0].setStyle("-fx-background-color: lightgreen;");
+        }
+        else {
+            currentPlayer = players[currentPlayer.getPlayerNr()];
+        }
+
+        currentPlayer.setActive(true);
+
+        for (int i = 0; i < playerLabels.length; i++) {
+            playerLabels[i].setStyle(getLabelColor(players[i]));
         }
 
         return currentPlayer;
