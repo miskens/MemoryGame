@@ -99,7 +99,7 @@ public class BoardView {
     private void configureGameBoard(GridPane fullGameBoard) {
 
         Image img = new javafx.scene.image.Image("Icons/smoothBackgrnd.jpg");
-        BackgroundImage bckgroundImage = new BackgroundImage(img, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+        BackgroundImage bckgroundImage = new BackgroundImage(img, BackgroundRepeat.SPACE, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background bGround = new Background(bckgroundImage);
 
         fullGameBoard.setBackground(bGround);
