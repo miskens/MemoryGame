@@ -2,11 +2,14 @@
 Memory game
 
 1. git clone git@github.com:RenasSaid/MemoryGame.git
-2. Download and install your OS version of JavaFX from https://gluonhq.com/products/javafx/
-3. In VScode add to vmArgs to launch.json:
+2. Download your OS version of JavaFX from https://gluonhq.com/products/javafx/
+3. Put the unpacked javafx files into a folder of your choise.
+4. In VScode, go to "run" and press "Add configuration..". Choose "Java".
+5. In VScode, add to VScode/vmArgs/launch.json:
         "vmArgs": "--module-path <path to javafx lib folder> --add-modules javafx.controls,javafx.fxml",
-4. In VSCode under "JAVA PROJECTS", add javafx files to "referenced libraries"
-5. Run.
+        add your own javafx path.
+6. In VSCode under "JAVA PROJECTS", add javafx files to "referenced libraries"
+7. Run.
 
 Tests
 
