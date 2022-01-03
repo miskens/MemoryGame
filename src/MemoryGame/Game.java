@@ -156,21 +156,36 @@ public class Game extends Application {
         Image img;
         ImageView alertImageView = new ImageView();
 
-        if(players[0].getPoints() > players[1].getPoints() && players[0].getPoints() > players[2].getPoints()) {
-            img = new Image("Icons/p1wins.png");
-            winnerText = players[0].getPlayerName() + " is the winner!\n Congratulations!!";
-        }
-        else if(players[1].getPoints() > players[0].getPoints() && players[1].getPoints() > players[2].getPoints()) {
-            img = new Image("Icons/p2wins.png");
-            winnerText = players[1].getPlayerName() + " is the winner!\n Congratulations!!";
-        }
-        else if(players[2].getPoints() > players[0].getPoints() && players[2].getPoints() > players[1].getPoints()) {
-            img = new Image("Icons/p3wins.png");
-            winnerText = players[2].getPlayerName() + " is the winner!\n Congratulations!!";
-        }
-        else {
-            img = new Image("Icons/draw.png");
-            winnerText = ("It was a draw! \n Good game!");
+        if(players.length == 2){
+            if(players[0].getPoints() > players[1].getPoints()){
+                img = new Image("Icons/p1wins.png");
+                winnerText = players[0].getPlayerName() + " is the winner!\n Congratulations!!";
+            }
+            else if(players[1].getPoints() > players[0].getPoints()){
+                img = new Image("Icons/p2wins.png");
+                winnerText = players[1].getPlayerName() + " is the winner!\n Congratulations!!";
+            }
+            else{
+                img = new Image("Icons/draw.png");
+                winnerText = ("It was a draw! \n Good game!");
+            }
+        }else{
+            if(players[0].getPoints() > players[1].getPoints() && players[0].getPoints() > players[2].getPoints()) {
+                img = new Image("Icons/p1wins.png");
+                winnerText = players[0].getPlayerName() + " is the winner!\n Congratulations!!";
+            }
+            else if(players[1].getPoints() > players[0].getPoints() && players[1].getPoints() > players[2].getPoints()) {
+                img = new Image("Icons/p2wins.png");
+                winnerText = players[1].getPlayerName() + " is the winner!\n Congratulations!!";
+            }
+            else if(players[2].getPoints() > players[0].getPoints() && players[2].getPoints() > players[1].getPoints()) {
+                img = new Image("Icons/p3wins.png");
+                winnerText = players[2].getPlayerName() + " is the winner!\n Congratulations!!";
+            }
+            else {
+                img = new Image("Icons/draw.png");
+                winnerText = ("It was a draw! \n Good game!");
+            }
         }
 
         Player.resetNrOfPlayers();
