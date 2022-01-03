@@ -220,6 +220,7 @@ public class BoardView {
 
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == ButtonType.OK){
+                        Player.resetNrOfPlayers();
                         openStarPage();
                     } else {
                         return;
